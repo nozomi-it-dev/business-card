@@ -7,7 +7,6 @@
   display: flex;
   justify-content: center;
   gap: var(--margin-md);
-  width: 100%;
   height: var(--navigation-hg);
   background-color: var(--primary-color);
 }

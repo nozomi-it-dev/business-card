@@ -12,18 +12,16 @@ const COMPANY_INFO = {
   branches: [
     {
       label: "Branch 1",
-      address:
-        "168 M.2 Baanklongsuan Phrasamutjeidee Samutprakan 10290 Thailand.",
+      address: "168 M.2 Baanklongsuan Phrasamutjeidee Samutprakan 10290 Thailand.",
     },
     {
       label: "Branch 2",
-      address:
-        "382/2 M.4 Baanklongsuan Phrasamutjeidee Samutprakan 10290 Thailand.",
+      address: "382/2 M.4 Baanklongsuan Phrasamutjeidee Samutprakan 10290 Thailand.",
     },
   ],
 };
 
-function Template({ data }) {
+function Template({ data, enableGpsLink = true }) {
   const logoUrl = "/logo.png";
   const ursUrl = "/urs.png";
 
@@ -38,12 +36,11 @@ function Template({ data }) {
         />
         <h1>{COMPANY_INFO.name}</h1>
       </div>
-
       <div className="card-body">
         <div className="info">
           <p className="name-th">{data?.full_name_th || "ชื่อ"}</p>
           <p className="name-en">{data?.full_name_en || "Name"}</p>
-          <p className="positionn">{data?.position || "Position"}</p>
+          <p className="position">{data?.position || "Position"}</p>
           <p>Mobile : {data?.tel || "000-000-0000"}</p>
           <p>E-mail : {data?.email || "example@email.com"}</p>
         </div>
@@ -54,7 +51,6 @@ function Template({ data }) {
           crossOrigin="anonymous"
         />
       </div>
-
       <div className="card-footer">
         <div className="left">
           <p>
@@ -75,12 +71,23 @@ function Template({ data }) {
             <div className="colon sm">
               <p>GPS</p>
               <span>:</span>
-              <p>{COMPANY_INFO.headOffice.gps}</p>
+              <p>
+                {enableGpsLink ? (
+                  <a
+                    href={COMPANY_INFO.headOffice.gps}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {COMPANY_INFO.headOffice.gps}
+                  </a>
+                ) : (
+                  COMPANY_INFO.headOffice.gps
+                )}
+              </p>
             </div>
           </div>
           <p>{COMPANY_INFO.website}</p>
         </div>
-
         <div className="right">
           <p>
             <strong>{COMPANY_INFO.branches[0].label} : </strong>

@@ -1,10 +1,10 @@
 :root {
   /* Card dimensions */
-  --card-aspect-ratio: 1.6 / 1;
+  --card-aspect-ratio: 1.8 / 1;
   --card-width: 100%;
-  --card-gap: 4cqw;
+  --card-gap: 3cqw;
   --card-padding-x: 6cqw;
-  --card-padding-y: 3cqw;
+  --card-padding-y: 2cqw;
 
   /* Header */
   --logo-size: 8cqw;
@@ -133,6 +133,11 @@
   display: flex;
   flex-direction: column;
   gap: var(--footer-left-gap);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
 }
 
 /* Colon */

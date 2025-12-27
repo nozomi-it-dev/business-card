@@ -179,7 +179,7 @@ function Home() {
         onClick={handleViewCard}
         style={{ cursor: editingId ? "pointer" : "default" }}
       >
-        <Template data={formData} />
+        <Template data={formData} enableGpsLink={false} />
       </div>
 
       <form onSubmit={(e) => e.preventDefault()}>
@@ -242,12 +242,11 @@ function Home() {
                 <button onClick={handleDownload} disabled={isDownloading}>
                   {isDownloading ? "DOWNLOADING..." : "DOWNLOAD"}
                 </button>
-                <button
-                  onClick={handleAction}
-                  disabled={!hasChanges || !isAuthorized}
-                >
-                  UPDATE
-                </button>
+                {isAuthorized && (
+                  <button onClick={handleAction} disabled={!hasChanges}>
+                    UPDATE
+                  </button>
+                )}
               </>
             )}
           </>

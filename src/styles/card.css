@@ -67,14 +67,7 @@
 
 @media (orientation: landscape) {
   .landscape {
-    display: flex;
     flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    gap: var(--margin-md);
-    width: 90vw;
-    height: fit-content;
-    overflow: hidden;
   }
 
   .btn-close {
@@ -88,6 +81,6 @@
 
   .tool {
     flex-direction: column;
-    margin-bottom: auto;
+    margin-top: auto;
   }
 }

@@ -6,12 +6,12 @@ This project is a web application developed with **React**, **Vite**, and **Fire
 
 ## Features
 
-* **Master Password**: Secures the creation and editing functionalities via a cookie-based authentication system.
-* **Card Creation**: A user-friendly interface to input employee details (Thai/English names, Position, Telephone, Email) with a real-time visual preview of the card.
-* **Card Storage**: A dedicated page displaying a complete list of all created business cards, allowing users to easily browse and search for specific entries.
-* **Image Generation**: Converts HTML layouts into high-quality images for downloading using canvas rendering technologies.
-* **Public View**: A clean, dedicated interface (`/view/:id`) designed for external clients to view the specific name card and QR code.
-* **Auto-Download**: Automatically triggers the download of the business card image when a client visits the viewing link.
+- **Master Password**: Secures the creation and editing functionalities via a cookie-based authentication system.
+- **Card Creation**: A user-friendly interface to input employee details (Thai/English names, Position, Telephone, Email) with a real-time visual preview of the card.
+- **Card Storage**: A dedicated page displaying a complete list of all created business cards, allowing users to easily browse and search for specific entries.
+- **Image Generation**: Converts HTML layouts into high-quality images for downloading using canvas rendering technologies.
+- **Public View**: A clean, dedicated interface (`/view/:id`) designed for external clients to view the specific name card and QR code.
+- **Auto-Download**: Automatically triggers the download of the business card image when a client visits the viewing link.
 
 ## Usage
 
