@@ -1,0 +1,68 @@
+:root {
+  --primary-color: #131313;
+  --secondary-color: #2b2b2b;
+  --tertiary-color: #d9d9d9;
+  --quaternary-color: #ffffff;
+
+  --margin-md: 32px;
+  --margin-sm: 12px;
+  --padding-md: 16px;
+  --padding-sm: 8px;
+
+  --text-size: 12px;
+  --icon-size: 32px;
+  --border-radius: 12px;
+  --navigation-hg: 60px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  padding: var(--margin-sm);
+  font-family: "Open Sans", sans-serif;
+  background-color: var(--primary-color);
+  color: var(--quaternary-color);
+}
+
+p {
+  font-size: var(--text-size);
+}
+
+.layout {
+  display: flex;
+  flex-direction: column;
+  gap: var(--margin-md);
+  margin-bottom: calc(var(--navigation-hg) + var(--margin-sm));
+}
+
+select,
+input,
+button {
+  padding: var(--padding-md);
+  width: 100%;
+  font-size: 16px;
+  background-color: var(--secondary-color);
+  color: var(--quaternary-color);
+  border: none;
+  border-radius: var(--border-radius);
+}
+
+select {
+  padding-right: var(--margin-md);
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right var(--padding-sm) center;
+  background-size: calc(var(--icon-size) - 3px);
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}

@@ -1,0 +1,18 @@
+.card-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--margin-sm);
+}
+
+.card-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--padding-sm);
+  padding: var(--padding-md);
+  background-color: var(--secondary-color);
+  border-radius: var(--border-radius);
+}
+
+.position {
+  opacity: 0.4;
+}
