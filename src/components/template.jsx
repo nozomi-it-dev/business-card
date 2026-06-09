@@ -22,8 +22,8 @@ const COMPANY_INFO = {
 };
 
 function Template({ data, enableGpsLink = true }) {
-  const logoUrl = "/LOGO.png";
-  const ursUrl = "/URS.png";
+  const logoUrl = "/logo.png";
+  const ursUrl = "/urs.png";
 
   return (
     <div className="template">

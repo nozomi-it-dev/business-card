@@ -3,7 +3,7 @@ import { Lock, LockOpen, X } from "lucide-react";
 function Header({ isAuthorized, onLockClick, onClose }) {
   return (
     <div className="header">
-      <img src="/LOGO.png" alt="Nozomi logo" className="header-logo" />
+      <img src="/logo.png" alt="Nozomi logo" className="header-logo" />
       <div>
         <p className="header-name">Nozomi</p>
         <p className="header-sub">Business Cards</p>
