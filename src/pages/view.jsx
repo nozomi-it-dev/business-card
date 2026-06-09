@@ -6,8 +6,6 @@ import Template from "../components/template";
 import { useGetCards } from "../hooks/getCard";
 import { downloadCard } from "../hooks/download";
 
-import "../styles/view.css";
-
 function View() {
   const { id } = useParams();
   const { cards, isLoading } = useGetCards();

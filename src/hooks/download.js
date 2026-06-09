@@ -15,9 +15,11 @@ export const downloadCard = async (element, formData) => {
       imageTimeout: 0,
     });
 
-    const position = formData.position || "NoPosition";
-    const fullNameEn = formData.full_name_en || "Unnamed";
-    const fileName = `Nozomi-${position}-${fullNameEn}.png`;
+    const name = formData.full_name_en || formData.full_name_th || "Unnamed";
+    const position = formData.position || "";
+    const fileName = position
+      ? `Nozomi Business Card - ${name} (${position}).png`
+      : `Nozomi Business Card - ${name}.png`;
 
     canvas.toBlob(
       (blob) => {

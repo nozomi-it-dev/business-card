@@ -1,4 +1,4 @@
-import "../styles/template.css";
+import "../template.css";
 
 const COMPANY_INFO = {
   name: "NOZOMI ENTERPRISE (THAILAND) CO.,LTD.",
@@ -22,8 +22,8 @@ const COMPANY_INFO = {
 };
 
 function Template({ data, enableGpsLink = true }) {
-  const logoUrl = "/logo.png";
-  const ursUrl = "/urs.png";
+  const logoUrl = "/LOGO.png";
+  const ursUrl = "/URS.png";
 
   return (
     <div className="template">

@@ -1,14 +1,12 @@
 import { useState, useEffect } from "react";
 import { useLocation, useParams, useNavigate } from "react-router-dom";
 import QRCode from "qrcode";
+import { X, Loader2 } from "lucide-react";
 
 import Header from "../components/header";
 import Template from "../components/template";
-import CloseIcon from "../assets/window-close.svg";
-
+import Navigation from "../components/navigation";
 import { useGetCards } from "../hooks/getCard";
-
-import "../styles/card.css";
 
 function Card() {
   const location = useLocation();
@@ -28,6 +26,11 @@ function Card() {
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredCards, setFilteredCards] = useState([]);
   const [qrCodeUrl, setQrCodeUrl] = useState("");
+
+  useEffect(() => {
+    document.body.classList.add("card-view-active");
+    return () => document.body.classList.remove("card-view-active");
+  }, []);
 
   useEffect(() => {
     if (location.state?.cardData) {
@@ -54,120 +57,101 @@ function Card() {
       } else {
         const filtered = cards.filter(
           (card) =>
-            card.full_name_th
-              .toLowerCase()
-              .includes(searchQuery.toLowerCase()) ||
+            card.full_name_th.toLowerCase().includes(searchQuery.toLowerCase()) ||
             card.full_name_en.toLowerCase().includes(searchQuery.toLowerCase())
         );
         setFilteredCards(filtered);
-
-        if (filtered.length === 1) {
-          handleCardSelect(filtered[0].id);
-        }
+        if (filtered.length === 1) handleCardSelect(filtered[0].id);
       }
     }
   }, [searchQuery, cards, isLoading]);
 
   useEffect(() => {
+    if (!selectedCardId) return;
     const generateQRCode = async () => {
       try {
-        const cleanUrl = `${window.location.origin}/view/${selectedCardId}`;
-        const qrDataUrl = await QRCode.toDataURL(cleanUrl, {
-          width: 300,
+        const url = `${window.location.origin}/view/${selectedCardId}`;
+        const dataUrl = await QRCode.toDataURL(url, {
+          width: 600,
           margin: 1,
-          color: {
-            dark: "#000000",
-            light: "#FFFFFF",
-          },
+          color: { dark: "#000000", light: "#FFFFFF" },
         });
-        setQrCodeUrl(qrDataUrl);
+        setQrCodeUrl(dataUrl);
       } catch (error) {
         console.error("Error generating QR code:", error);
       }
     };
-
-    if (selectedCardId) {
-      generateQRCode();
-    }
+    generateQRCode();
   }, [selectedCardId]);
 
   const handleClose = () => {
-    if (selectedCardId) {
-      navigate(`/${selectedCardId}`);
-    } else {
-      navigate("/");
-    }
+    navigate(selectedCardId ? `/${selectedCardId}` : "/");
   };
 
   const handleCardSelect = (cardId) => {
     if (!cardId) return;
-
     const card = cards.find((c) => c.id === cardId);
     if (card) {
       const { id: selectedId, ...data } = card;
       setFormData(data);
       setSelectedCardId(selectedId);
-
-      navigate(`/card/${selectedId}`, {
-        replace: true,
-        state: { cardData: card },
-      });
+      navigate(`/card/${selectedId}`, { replace: true, state: { cardData: card } });
     }
   };
 
-  const handleDropdownChange = (e) => {
-    handleCardSelect(e.target.value);
-  };
-
-  const handleSearchChange = (e) => {
-    setSearchQuery(e.target.value);
-  };
-
   return (
-    <div className="landscape">
-      <img
-        src={CloseIcon}
-        alt="Close"
-        className="btn-close"
-        onClick={handleClose}
-      />
-
-      <div className="spacing">
-        <Header />
+    <div className="card-page">
+      <div className="card-header-wrap">
+        <Header onClose={handleClose} />
       </div>
-      <Template data={formData} />
 
-      <div className="tool">
-        {qrCodeUrl ? (
-          <img className="qrcode" src={qrCodeUrl} alt="QR Code" />
-        ) : (
-          <div className="qrcode qrcode-placeholder">
-            <p>Generating a QR code...</p>
+      <div className="card-template-area">
+        <Template data={formData} />
+      </div>
+
+      <button className="card-close-ls" onClick={handleClose}>
+        <X size={20} />
+      </button>
+
+      <div className="card-side">
+        <div className="card-qr">
+          {qrCodeUrl ? (
+            <img src={qrCodeUrl} alt="QR Code" />
+          ) : (
+            <div className="card-qr-placeholder">
+              <p>Generating QR code...</p>
+            </div>
+          )}
+        </div>
+
+        {isLoading && (
+          <div className="loading-state">
+            <Loader2 size={20} className="spinner" />
           </div>
         )}
 
-        <div className="filter">
+        <div className="card-filter">
           <select
-            name="cards"
             value={selectedCardId}
-            onChange={handleDropdownChange}
+            onChange={(e) => handleCardSelect(e.target.value)}
             disabled={isLoading}
           >
             {filteredCards.map((card) => (
               <option key={card.id} value={card.id}>
-                {card.full_name_th || card.full_name_en || "Unamed"}
+                {card.full_name_th || card.full_name_en || "Unnamed"}
               </option>
             ))}
           </select>
-
           <input
             type="text"
             placeholder="Search by name"
             value={searchQuery}
-            onChange={handleSearchChange}
+            onChange={(e) => setSearchQuery(e.target.value)}
           />
         </div>
       </div>
+
+      <Navigation />
     </div>
   );
 }

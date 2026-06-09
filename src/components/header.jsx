@@ -1,7 +1,25 @@
-import "../styles/header.css";
+import { Lock, LockOpen, X } from "lucide-react";
 
-function Header() {
-  return <h1 className="header">Nozomi Business Card</h1>;
+function Header({ isAuthorized, onLockClick, onClose }) {
+  return (
+    <div className="header">
+      <img src="/LOGO.png" alt="Nozomi logo" className="header-logo" />
+      <div>
+        <p className="header-name">Nozomi</p>
+        <p className="header-sub">Business Cards</p>
+      </div>
+      {onClose && (
+        <button className="header-lock" onClick={onClose}>
+          <X size={20} />
+        </button>
+      )}
+      {onLockClick && !onClose && (
+        <button className="header-lock" onClick={onLockClick}>
+          {isAuthorized ? <LockOpen size={20} /> : <Lock size={20} />}
+        </button>
+      )}
+    </div>
+  );
 }
 
 export default Header;

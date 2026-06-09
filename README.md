@@ -2,26 +2,44 @@
 
 ## Overview
 
-This project is a web application developed with **React**, **Vite**, and **Firebase** to streamline the creation and management of business cards for Nozomi Enterprise. It serves three main purposes: an administrative interface for creating and editing cards, a centralized storage for all employee cards, and a public-facing view for clients. When clients scan a QR code or visit a specific link, they are presented with the name card which is automatically processed and loads automatically onto the device.
+Web application built with **React**, **Vite**, and **Firebase** for creating and managing digital business cards for Nozomi Enterprise (Thailand) Co., Ltd. The app serves three roles: an admin interface for creating and editing cards, a storage page for browsing all employee cards, and a public view for clients who scan a QR code.
 
 ## Features
 
-- **Master Password**: Secures the creation and editing functionalities via a cookie-based authentication system.
-- **Card Creation**: A user-friendly interface to input employee details (Thai/English names, Position, Telephone, Email) with a real-time visual preview of the card.
-- **Card Storage**: A dedicated page displaying a complete list of all created business cards, allowing users to easily browse and search for specific entries.
-- **Image Generation**: Converts HTML layouts into high-quality images for downloading using canvas rendering technologies.
-- **Public View**: A clean, dedicated interface (`/view/:id`) designed for external clients to view the specific name card and QR code.
-- **Auto-Download**: Automatically triggers the download of the business card image when a client visits the viewing link.
+- **Authorization**: Cookie-based master password. Lock icon in the header unlocks create, update, and delete privileges. Authorization persists for 7 days.
+- **Card Creation**: Form with real-time card preview. Validates phone number (10 digits) and email format. CREATE button appears only when all fields are valid.
+- **Card Storage**: Searchable list of all cards with initials avatar. Authorized users can select and batch-delete multiple cards.
+- **Card View**: Landscape-optimized view with full-size card on the left and QR code + card selector on the right.
+- **Public View** (`/view/:id`): Auto-downloads the business card image when a client opens the link from a QR scan.
+- **Image Download**: Generates a high-resolution PNG via canvas rendering. File named `Nozomi Business Card - [Name] ([Position]).png`.
+- **Responsive**: Portrait and landscape layouts handled separately via CSS media queries.
+
+## Setup
+
+```bash
+cp .env.example .env
+# fill in Firebase credentials and master password
+npm install
+npm run dev
+```
+
+## Environment Variables
+
+See `.env.example` for all required variables.
+
+| Variable | Description |
+|---|---|
+| `VITE_FIREBASE_*` | Firebase project configuration |
+| `VITE_MASTER_PASSWORD` | Password required to create, update, and delete cards |
 
 ## Usage
 
-1. **Authentication**: Enter the Master Password to unlock administrative privileges (Create, Update, Save).
-2. **Create Card**: Navigate to the "New Card" tab, fill in the required personnel information, and click "CREATE" to save to the database.
-3. **Browse Cards**: Access the "Storage" tab to view the list of all existing cards. Click on a specific entry to view or edit the data.
-4. **Manual Download**: Use the "DOWNLOAD" button within the editor to generate and save the card image manually for administrative use.
-5. **Client Access**: Share the QR code with a client; when scanned, they are directed to the card's specific display page.
-6. **Automatic Saving**: Upon accessing the viewing page, the name card image is automatically processed and downloaded to the client's device.
+1. **Authorize**: Tap the lock icon (top right) and enter the master password.
+2. **Create card**: Go to the New Card tab, fill in all fields, tap CREATE.
+3. **Edit card**: Tap any card in Storage to open it in the editor, make changes, tap UPDATE.
+4. **Delete cards**: In Storage, tap Edit, select one or more cards, tap Delete.
+5. **View / Download**: Tap a card in edit mode to open the card view. The QR code links clients directly to the auto-download page.
 
 ## License
 
-This project is licensed under the **MIT License**.
+MIT

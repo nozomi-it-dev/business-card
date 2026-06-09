@@ -1,9 +1,6 @@
 import { NavLink, useLocation } from "react-router-dom";
+import { Contact, Archive } from "lucide-react";
 
-import NewCardIcon from "../assets/card-account-details.svg";
-import StorageIcon from "../assets/archive.svg";
-
-import "../styles/navigation.css";
 
 function Navigation() {
   const location = useLocation();
@@ -15,11 +12,11 @@ function Navigation() {
   return (
     <div className="navbar">
       <NavLink to="/" className={isHomePage ? "page current" : "page"}>
-        <img src={NewCardIcon} alt="New card icon" />
+        <Contact size={20} />
         <p>New Card</p>
       </NavLink>
       <NavLink to="/storage" className={({ isActive }) => (isActive ? "page current" : "page")}>
-        <img src={StorageIcon} alt="Storage icon" />
+        <Archive size={20} />
         <p>Storage</p>
       </NavLink>
     </div>

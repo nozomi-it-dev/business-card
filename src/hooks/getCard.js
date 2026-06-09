@@ -25,5 +25,5 @@ export const useGetCards = () => {
     fetchCards();
   }, []);
 
-  return { cards, isLoading };
+  return { cards, isLoading, refetch: fetchCards };
 };

@@ -1,4 +1,4 @@
-import { collection, addDoc, doc, updateDoc } from "firebase/firestore";
+import { collection, addDoc, doc, updateDoc, writeBatch } from "firebase/firestore";
 import { db } from "./firebase";
 
 export const useSetCards = () => {
@@ -23,5 +23,16 @@ export const useSetCards = () => {
     }
   };
 
-  return { updateCard, createCard };
+  const deleteCards = async (ids) => {
+    try {
+      const batch = writeBatch(db);
+      ids.forEach((id) => batch.delete(doc(db, "card", id)));
+      await batch.commit();
+    } catch (error) {
+      console.error("Error deleting cards: ", error);
+      throw error;
+    }
+  };
+
+  return { createCard, updateCard, deleteCards };
 };
